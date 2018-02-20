@@ -1,62 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
-  <title>Ricas-Recetas</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+    crossorigin="anonymous">
+  <link rel="stylesheet" href="assets/css/main.css">
 </head>
+
 <body>
-  <section>
-    <div class="container-fluid" id="registry">
+
+  <section id="auth">
+    <div class="container">
       <div class="row justify-content-center">
-        <div class="col-md-7 col-xs-12 text-center">
-          <h1 class="text-center">Ricas Recetas</h1>
-          <img src="" class="img-fluid rounded-circle mar" alt="">
-        </div>
-      </div>
-      <div class="row justify-content-center">
-        <div class="col-md-5 col-xs-12">
-          <input type="text" class="mar rounded" placeholder="Email" id="email">
-          <input type="password" class="mar rounded" placeholder="Password" id="pw">
-        </div>
-      </div>
-      <div class="row justify-content-center">
-        <div class="col-md-5 col-xs-12">
-          <button class="btn btn-success mar rounded" id="login-btn">Log in</button>
-        </div>
-        <div class="col-md-5 col-xs-12">
-          <button class="btn btn-primary mar rounded" id="signup-btn">Sign up</button>
+        <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+          <div id="modal-auth" class="text-center">
+            <div class="row justify-content-center">
+              <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                <h2>Ricas recetas</h2>
+              </div>
+            </div>
+            <div class="row justify-content-center">
+              <div class="col-lg-8 col-md-8 col-sm-10 col-10">
+                <input type="text" id="email" placeholder="Email">
+                <input type="password" id="pw" placeholder="Password">
+              </div>
+            </div>
+            <div class="row justify-content-center">
+              <div class="col-lg-8 col-md-8 col-sm-10 col-10">
+                <button class="btn btn-success">Log in</button>
+                <button class="btn btn-primary">Sign up</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <header>
-    <nav class="navbar navbar-inverse navbar-fixed-top navbarPortafolio">
-      <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="index.html"><span>logo</span></a>
-        </div>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="#" class="text-nav backgraundText1"><strong>Mis recetas</strong></a></li>
-            <li><a href="#" class="text-nav backgraundText2"><strong>Mis dietas</strong></a></li>
-            <li><a href="#" class="text-nav backgraundText3"><strong>Salir</strong></a></li>
-          </ul>
-        </div><!-- /.navbar-collapse -->
-      </div><!-- /.container-fluid -->
-    </nav>
-  </header>
-  <section>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">Navbar</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
     
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Dropdown
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" href="#">Disabled</a>
+          </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+      </div>
+    </nav>
+
+
+  <section id="home">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-10 col-md-10 col-sm-12 col-12">
+          <section id="carrousel"></section>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-lg-10 col-md-10 col-sm-10 col-10">
+          <section id="search_recipe" class="text-center">
+            <input type="text" placeholder="Search Recipe">
+          </section>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <section id="recipe_result"></section>
+        </div>
+      </div>
+    </div>
   </section>
+
+  <section id="my_recipes">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+          <div class="card mb-3">
+            <img class="card-img-top" src="assets/img/recipe_sample.jpg" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">
+                <small class="text-muted">Added 3 mins ago</small>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    foooooooter
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
 </body>
+
 </html>
