@@ -1,1 +1,73 @@
+#auth {
+    background-image: url(../img/auth_bg.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    /*display: none; /*delete later*/
+}
 
+#modal-auth {
+    background: white;
+    padding: 10vh 0;
+    margin: 25% 0;
+    border-radius: 0.5em;
+}
+
+#modal-auth input {
+    width: 100%;
+    border: 2px solid rgba(0, 0, 0, 0.082);
+    outline: none;
+    border-radius: 1em;
+    padding: 0.5em;
+    margin: 0.5em 0;
+}
+
+#modal-auth button {
+    width: 100%;
+    margin: 0.2em 0;
+}
+
+#home {
+    padding: 2em 0;
+    height: 100vh;
+    background: #f8f9fa;
+   /* display: none; /*delete later*/
+}
+
+#carrousel {
+    width: 100%;
+    height: 40vh;
+    background: green;
+}
+
+#search_recipe {
+    height: 20vh;
+    margin: 2em 0;
+}
+
+#search_recipe input {
+    width: 100%;
+    padding: 0.5em;
+    font-size: 1.5em;
+    border: none;
+    border-radius: 1em;
+    outline: none;
+}
+
+nav {
+    height: 10vh;
+}
+
+#my_recipes {
+    background: rgba(0, 255, 0, 0.166);;
+    min-height: 85vh;
+    padding: 2em 0;
+}
+
+footer {
+    background: #f8f9fa;
+    position: fixed;
+    bottom: 0;
+    width: 100%
+}
