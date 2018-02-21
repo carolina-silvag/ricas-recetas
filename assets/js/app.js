@@ -30,6 +30,50 @@ function signup() {
   }
 }
 
+if (screen.width<1024) {
+	ajustePantallaPequeña();
+} else {
+	ajustePantallaGrande();
+}
+
+
+function ajustePantallaPequeña() {
+	fetch('https://api.edamam.com/search?q='+ randomize() +'&app_id=01dfc015&app_key=ab3ca8c9eb858e5904ba8bc581944e8e&from=0&to=9&calories=gte%20591,%20lte%20722&health=alcohol-free').then(function(response) {
+	    return response.json();
+	 })
+	
+    .then(function(data) {
+    	console.log(data);
+    	let cols = 0;
+    	let index = 0;
+
+    	
+			$.each(data.hits, function(i, food) {
+	        index += 1;
+			$(".carousel-inner").append(`<div class="carousel-item img-carousel-${index}"><div class="row justify-content-center"></div>`);
+			 
+
+		    let image = food.recipe.image;
+		    let name = food.recipe.label;
+
+		    $(".img-carousel-"+index + " .row").last().append(`<div class="col-xs-12 recetasRecomendadas">
+				              		<div class="img-thumbnail text-center">
+				                	<a href=""><img class="d-block w-100" src="${image}"></a>
+				                	<div class="carousel-caption d-none d-md-block">
+								    	<h5>${name}</h5>
+								 	</div></div></div>`);
+
+
+    	});
+	
+    	
+    	$('.img-carousel-1').addClass('active');
+
+    });
+	
+}
+
+function ajustePantallaGrande() {
 fetch('https://api.edamam.com/search?q='+ randomize() +'&app_id=01dfc015&app_key=ab3ca8c9eb858e5904ba8bc581944e8e&from=0&to=9&calories=gte%20591,%20lte%20722&health=alcohol-free').then(function(response) {
 	    return response.json();
 	 })
@@ -39,16 +83,17 @@ fetch('https://api.edamam.com/search?q='+ randomize() +'&app_id=01dfc015&app_key
     	let cols = 0;
     	let index = 0;
 
-    	$.each(data.hits, function(i, food) {
+    	
+			$.each(data.hits, function(i, food) {
 	        if (cols == 0) {
 	        		index += 1;
-			      $(".carousel-inner").append(`<div class="carousel-item img-carousel-${index}"><div class="row"></div>`);
+			      $(".carousel-inner").append(`<div class="carousel-item img-carousel-${index}"><div class="row justify-content-center"></div>`);
 			    }
 
 		    let image = food.recipe.image;
 		    let name = food.recipe.label;
 
-		    $(".img-carousel-"+index + " .row").last().append(`<div class="col-4 recetasRecomendadas">
+		    $(".img-carousel-"+index + " .row").last().append(`<div class="col-md-4 recetasRecomendadas">
 				              		<div class="img-thumbnail text-center">
 				                	<a href=""><img class="d-block w-100" src="${image}"></a>
 				                	<div class="carousel-caption d-none d-md-block">
@@ -61,10 +106,12 @@ fetch('https://api.edamam.com/search?q='+ randomize() +'&app_id=01dfc015&app_key
       			cols = 0;
     		}
     	});
-
+	
+    	
     	$('.img-carousel-1').addClass('active');
 
     });
+}
 
 
 $('.carousel').carousel();

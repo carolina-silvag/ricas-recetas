@@ -8,8 +8,13 @@ img {
 }
 
 /*desde aqui clases del carrusel*/
-.imgCarrusel {
-  height: 250px;
+
+.carousel-control-next, .carousel-control-prev {
+	width: 8% !important;
+}
+
+.row {
+	margin: 0;
 }
 
 .space {
