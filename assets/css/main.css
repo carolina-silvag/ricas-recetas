@@ -35,3 +35,26 @@ nav {
 #foodList .card {
     cursor: pointer;
 }
+
+/*desde aqui clases del carrusel*/
+
+.carousel-control-next, .carousel-control-prev {
+    width: 10% !important;
+}
+
+.row {
+    margin: 0;
+}
+
+.space {
+  margin-bottom: 3%; 
+}
+
+.recetasRecomendadas {
+    padding: 2%;
+    margin: 10px 0 10px 0;
+}
+
+.card-img-top {
+    object-fit: cover;
+}
