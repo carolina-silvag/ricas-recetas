@@ -2,9 +2,11 @@ $(document).ready(() => {
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
       $('#registry').hide();
+      $('#menuNavbar').show();
       $('#nav-search').show();
     } else {
       $('#nav-search').hide();
+      $('#menuNavbar').hide();
       $('#registry').show();
       $('#login-btn').click(login);
       $('#signup-btn').click(signup);
@@ -14,8 +16,8 @@ $(document).ready(() => {
 });
 
 function login() {
-  let email = $('#email').val();
-  let pw = $('#pw').val();
+  let email = $('#email-login').val();
+  let pw = $('#pw-login').val();
   if (email !== '' && pw !== '') {
     const promise = firebase.auth().signInWithEmailAndPassword(email, pw);
     promise.catch(e => alert(e.message));
@@ -23,9 +25,11 @@ function login() {
 }
 
 function signup() {
-  let email = $('#email').val();
-  let pw = $('#pw').val();
+  let email = $('#email-signup').val();
+  let pw = $('#pw-signup').val();
+  console.log('hola', email, pw);
   if (email !== '' && pw !== '') {
+    console.log('hola2');
     const promise = firebase.auth().createUserWithEmailAndPassword(email, pw);
     promise.catch(e => alert(e.message));
   }
@@ -41,19 +45,17 @@ if (screen.width<1024) {
 	ajustePantallaGrande();
 }
 
-
+// solo cuando se carga desde celular 
 function ajustePantallaPequeña() {
 	fetch('https://api.edamam.com/search?q='+ randomize() +'&app_id=01dfc015&app_key=ab3ca8c9eb858e5904ba8bc581944e8e&from=0&to=9&calories=gte%20591,%20lte%20722&health=alcohol-free').then(function(response) {
 	    return response.json();
 	 })
 	
     .then(function(data) {
-    	let cols = 0;
     	let index = 0;
-
 			$.each(data.hits, function(i, food) {
-	        index += 1;
-			$(".carousel-inner").append(`<div class="carousel-item img-carousel-${index}"><div class="row justify-content-center"></div>`);
+	      index += 1;
+			  $(".carousel-inner").append(`<div class="carousel-item img-carousel-${index}"><div class="row justify-content-center"></div>`);
 			 
 
 		    let image = food.recipe.image;
@@ -63,13 +65,14 @@ function ajustePantallaPequeña() {
 				              		<div class="img-thumbnail text-center">
 				                	<a href=""><img class="d-block w-100" src="${image}"></a>
 				                	<div class="carousel-caption d-none d-md-block">
-								    	<h5>${name}</h5>
-								 	</div></div></div>`);
+								    	    <h5>${name}</h5>
+								 	        </div></div></div>`);
     	});
     	$('.img-carousel-1').addClass('active');
     });
 }
 
+// solo cuando se carga desde web
 function ajustePantallaGrande() {
 fetch('https://api.edamam.com/search?q='+ randomize() +'&app_id=01dfc015&app_key=ab3ca8c9eb858e5904ba8bc581944e8e&from=0&to=9&calories=gte%20591,%20lte%20722&health=alcohol-free').then(function(response) {
 	    return response.json();
@@ -78,13 +81,11 @@ fetch('https://api.edamam.com/search?q='+ randomize() +'&app_id=01dfc015&app_key
     .then(function(data) {
     	let cols = 0;
     	let index = 0;
-
-    	
 			$.each(data.hits, function(i, food) {
-	        if (cols == 0) {
-	        		index += 1;
-			      $(".carousel-inner").append(`<div class="carousel-item img-carousel-${index}"><div class="row justify-content-center"></div>`);
-			    }
+        if (cols == 0) {
+        		index += 1;
+		      $(".carousel-inner").append(`<div class="carousel-item img-carousel-${index}"><div class="row justify-content-center"></div>`);
+		    }
 		    let image = food.recipe.image;
 		    let name = food.recipe.label;
 
@@ -92,7 +93,7 @@ fetch('https://api.edamam.com/search?q='+ randomize() +'&app_id=01dfc015&app_key
 				              		<div class="img-thumbnail text-center">
 				                	<a href=""><img class="d-block w-100" src="${image}"></a>
 				                	<div class="carousel-caption d-none d-md-block">
-								    	    <h5>${name}</h5>
+								    	    <h5 class="nameFood">${name}</h5>
 								 	        </div></div></div>`);
 
 		    cols +=1;
@@ -110,16 +111,17 @@ fetch('https://api.edamam.com/search?q='+ randomize() +'&app_id=01dfc015&app_key
 
 $('.carousel').carousel();
 
-
+// funcion random para carrusel al cargar la pagina
 function randomize() {
   const lis = ['pollo', 'chocolate', 'carne', 'arroz', 'dulce', 'masa'];
-  // while (lis.length) {
-    let result =lis.splice(getRandomInt(0, lis.length), 1)[0];
-    // console.log(result);
-    return result;
-  // }
+
+  let result =lis.splice(getRandomInt(0, lis.length), 1)[0];
+  
+  return result;
+ 
 }
 
+// seleccion de palabra clave para carrusel
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
@@ -132,13 +134,14 @@ function getRandomInt(min, max) {
     	console.log(data);
     });*/
   
-
+// llama a la funcion cuando al buscador se presiona un enter
 $('#searchRecetas').on('keypress', function(event) {
   if (event.which === 13) {
-    setSearch($('#searchRecetas').val())
+    setSearch($('#searchRecetas').val());
   }
-})
+});
 
+// buscar todas las imagenes con palabra ingresada
 function setSearch(search) {
   $('#carrousel').hide()
 	$('#foodList').html("");
@@ -147,79 +150,69 @@ function setSearch(search) {
    })
 	
     .then(function(data) {
-      $('#foodList').append(`ddjjdj`)
     	console.log(data);
+      let cols = 0;
     	let index = 0;
       	$.each(data.hits, function(i, food) {
       	 	index = i + 1;
-			    $("#foodList").append('<div class="row listImg"></div>');
+          if(i == 0){
+			      $("#foodList").append('<div class="row listImg"></div>');  
+          }
 
 		    let image = food.recipe.image;
         let name = food.recipe.label;
         
         $('#foodList .row').append(`<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 imgcont" data-index="${index}">
-                                    <div class="card mb-3">
-                                    <img class="card-img-top img-${index}" src="${image}">
-                                    <div class="card-body">
-                                    <h5 class="card-title text-${index}">${name}</h5>
-                                    <p class="card-text">
-                                    <small class="text-muted">${food.recipe.dietLabels}</small>
-                                    </p>
+                                    <div class="card mb-3 card-${index} img-thumbnail">
+                                      <img class="card-img-top img-${index}" src="${image}">
+                                      <div class="card-body">
+                                        <h5 class="card-title text-${index}">${name}</h5>
+                                        <p class="card-text">
+                                          <small class="text-muted">${food.recipe.dietLabels}</small>
+                                        </p>
+                                      </div>
                                     </div>
-                                    </div>
-                                    </div>`);
+                                  </div>`);
 		});
+    // llama a la funcion cuando pasar por la imagen
 		$('.imgcont').mouseover(getInImg);
+    // llama a la funcion cuando sale de la imagen
 		$('.imgcont').mouseleave(getOutImg);
     });
 }
 
+// Al entrar a la imagen buscada le da un efecto 
 function getInImg() {
   let index = $(this).data('index');
 
-  $('.text-'+index).show();
   $('.img-'+index).css({'filter': 'brightness(30%)', 
     '-webkit-filter': 'brightness(30%)',
     '-moz-filter': 'brightness(30%)', 
     '-o-filter': 'brightness(30%)',
     '-ms-filter': 'brightness(30%)',
-    'filter': 'grayscale(30%)',
-    'filter': 'url(grayscale.svg)', // Firefox 4+ 
-    'filter': 'gray' // IE 6-9
+    'filter': 'grayscale(30%)'
   });
-  $('.img-'+index).parent().css({'position': 'relative',
+  $('.card-'+index).css({'position': 'relative',
     'z-index': '1', 
     '-webkit-transform': 'scale(1.2)',
     '-moz-transform': 'scale(1.2)',
     '-ms-transform': 'scale(1.2)',
     '-o-transform': 'scale(1.2)',
     'transform': 'scale(1.2)'});
-  $('.text-'+index).css({'position': 'absolute',
-    'top': '50%',
-    'left': '50%',
-    'transform': 'translateX(-50%) translateY(-50%)',
-    'margin': '0',
-    'z-index': '2',
-    'color': 'white',
-    'text-align': 'center',
-    'font-weight': 'bold',
-    'font-size': '2em'});
 }
 
-// Al salir de la imagen cambia
+// Al salir de la imagen vuelve a su estado por defecto
 function getOutImg() {
   var index = $(this).data('index');
-  $('.text-'+index).hide();
 
-  $('.img-'+index).parent().css({'position': 'relative',
+  $('.card-'+index).css({'position': 'relative',
     'z-index': '0',
     '-webkit-transition': 'scale(1.0)',
     '-moz-transform': 'scale(1.0)',
     '-ms-transform': 'scale(1.0)',
     '-o-transform': 'scale(1.0)',
     'transform': 'scale(1.0)'});
-  $('.text-'+ index+ 'figure').css({'display': 'none', 
-    'background-color': 'transparent'});
+
   $('.img-'+index).css({'filter': 'brightness(100%)', 
     '-webkit-filter': 'brightness(100%)'});
 }

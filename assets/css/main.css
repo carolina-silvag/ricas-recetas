@@ -1,49 +1,49 @@
 body {
-    height: 100vh;
-    background: rgba(0, 255, 0, 0.166);
+  height: 100vh;
+  background: rgba(0, 255, 0, 0.166);
 }
 
 #carrousel {
-    width: 100%;
-    height: 40vh;
-    margin: 3em 0;
-    background: green;
+  width: 100%;
+  height: 40vh;
+  margin: 3em 0;
+  background: green;
 }
 
 #search_recipe {
-    height: 20vh;
-    margin: 0.5em 0;
+  height: 20vh;
+  margin: 0.5em 0;
 }
 
 #search_recipe input {
-    width: 100%;
-    padding: 0.5em 1em;
-    font-size: 1.5em;
-    border: none;
-    border-radius: 1em;
-    outline: none;
+  width: 100%;
+  padding: 0.5em 1em;
+  font-size: 1.5em;
+  border: none;
+  border-radius: 1em;
+  outline: none;
 }
 
 nav {
-    height: 10vh;
+  height: 10vh;
 }
 
 #registry button {
-    margin: 0 0.5em;
+  margin: 0 0.5em;
 }
 
 #foodList .card {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 /*desde aqui clases del carrusel*/
 
 .carousel-control-next, .carousel-control-prev {
-    width: 10% !important;
+  width: 10% !important;
 }
 
 .row {
-    margin: 0;
+  margin: 0;
 }
 
 .space {
@@ -51,10 +51,18 @@ nav {
 }
 
 .recetasRecomendadas {
-    padding: 2%;
-    margin: 10px 0 10px 0;
+  padding: 2%;
+  margin: 10px 0 10px 0;
 }
 
 .card-img-top {
-    object-fit: cover;
+  object-fit: cover;
+}
+
+.card-text {
+  font: 10px !important;
+}
+
+.nameFood {
+  color: red;
 }

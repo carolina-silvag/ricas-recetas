@@ -25,7 +25,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-              <li class="nav-item dropdown">
+              <li class="nav-item dropdown" id="menuNavbar">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
                   aria-expanded="false">
                   More
@@ -39,10 +39,8 @@
               </li>
           </ul>
           <form class="form-inline my-2 my-lg-0" id="registry">
-            <input class="form-control mr-sm-2" type="email" id="email" placeholder="Email" aria-label="Email">
-            <input class="form-control mr-sm-2" type="password" id="pw" placeholder="Password" aria-label="Password">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="" id="login-btn">Log in</button>
-            <button class="btn btn-outline-success my-2 my-sm-0" type="" id="signup-btn">Sign up</button>
+            <button type="button" class="btn btn-outline-success my-2 my-sm-0" data-toggle="modal" data-target="#modalLog-in">Log in</button>
+            <button type="button" class="btn btn-outline-success my-2 my-sm-0" data-toggle="modal" data-target="#modalSing-up">Sign up</button>
           </form>
           <form class="form-inline my-2 my-lg-0" id="nav-search">
             <input class="form-control mr-sm-2 searchRecetas" type="search" placeholder="Search" aria-label="Search">
@@ -54,7 +52,7 @@
   <section id="home">
     <div class="container">
       <div class="row justify-content-center">
-        <div class="col-lg-11 col-md-11 col-sm-12 col-12">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
           <div id="carouselExampleControls" class="carousel slide multi-item-carousel" data-ride="carousel">
           <div class="carousel-inner">   
             </div>
@@ -80,6 +78,52 @@
       <div class="row justify-content-center">
         <div class="col-lg-10 col-md-10 col-sm-12 col-12">
           <section id="foodList"></section>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+
+    <!-- Modal Ingreso -->
+    <div class="modal fade" id="modalLog-in" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <input class="form-control mr-sm-2" type="email" id="email-login" placeholder="Email" aria-label="Email">
+            <input class="form-control mr-sm-2" type="password" id="pw-login" placeholder="Password" aria-label="Password">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="login-btn">Log in</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Registro -->
+    <div class="modal fade" id="modalSing-up" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <input class="form-control mr-sm-2" type="email" id="email-signup" placeholder="Email" aria-label="Email">
+            <input class="form-control mr-sm-2" type="password" id="pw-signup" placeholder="Password" aria-label="Password">
+
+          </div>
+          <div class="modal-footer text-center">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="signup-btn">Sing up</button>
+          </div>
         </div>
       </div>
     </div>
