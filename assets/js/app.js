@@ -1,13 +1,14 @@
 $(document).ready(() => { 
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
-    	$('#registry').hide()
-      $('#home').show();
+      $('#registry').hide();
+      $('#nav-search').show();
     } else {
-    	$('#registry').show()
-    	$('#home').hide();
+      $('#nav-search').hide();
+      $('#registry').show();
       $('#login-btn').click(login);
       $('#signup-btn').click(signup);
+      $('#logout-btn').click(logout);
     }
   }); // firebase
 });
@@ -30,6 +31,10 @@ function signup() {
   }
 }
 
+function logout() {
+  firebase.auth().signOut();
+}
+
 if (screen.width<1024) {
 	ajustePantallaPequeña();
 } else {
@@ -43,11 +48,9 @@ function ajustePantallaPequeña() {
 	 })
 	
     .then(function(data) {
-    	console.log(data);
     	let cols = 0;
     	let index = 0;
 
-    	
 			$.each(data.hits, function(i, food) {
 	        index += 1;
 			$(".carousel-inner").append(`<div class="carousel-item img-carousel-${index}"><div class="row justify-content-center"></div>`);
@@ -62,15 +65,9 @@ function ajustePantallaPequeña() {
 				                	<div class="carousel-caption d-none d-md-block">
 								    	<h5>${name}</h5>
 								 	</div></div></div>`);
-
-
     	});
-	
-    	
     	$('.img-carousel-1').addClass('active');
-
     });
-	
 }
 
 function ajustePantallaGrande() {
@@ -79,7 +76,6 @@ fetch('https://api.edamam.com/search?q='+ randomize() +'&app_id=01dfc015&app_key
 	 })
 	
     .then(function(data) {
-    	console.log(data);
     	let cols = 0;
     	let index = 0;
 
@@ -89,7 +85,6 @@ fetch('https://api.edamam.com/search?q='+ randomize() +'&app_id=01dfc015&app_key
 	        		index += 1;
 			      $(".carousel-inner").append(`<div class="carousel-item img-carousel-${index}"><div class="row justify-content-center"></div>`);
 			    }
-
 		    let image = food.recipe.image;
 		    let name = food.recipe.label;
 
@@ -97,9 +92,8 @@ fetch('https://api.edamam.com/search?q='+ randomize() +'&app_id=01dfc015&app_key
 				              		<div class="img-thumbnail text-center">
 				                	<a href=""><img class="d-block w-100" src="${image}"></a>
 				                	<div class="carousel-caption d-none d-md-block">
-								    	<h5>${name}</h5>
-								 	</div></div></div>`);
-
+								    	    <h5>${name}</h5>
+								 	        </div></div></div>`);
 
 		    cols +=1;
     		if (cols == 3) {
@@ -139,55 +133,45 @@ function getRandomInt(min, max) {
     });*/
   
 
-$('#btnSearch').click(search);
-function search() {
-  setSearch($('#searchRecetas').val());
-}
+$('#searchRecetas').on('keypress', function(event) {
+  if (event.which === 13) {
+    setSearch($('#searchRecetas').val())
+  }
+})
 
 function setSearch(search) {
-	$('#listFood').html("");
+  $('#carrousel').hide()
+	$('#foodList').html("");
 	fetch('https://api.edamam.com/search?q='+ search +'&app_id=01dfc015&app_key=ab3ca8c9eb858e5904ba8bc581944e8e&from=0&to=100&calories=gte%20591,%20lte%20722&health=alcohol-free').then(function(response) {
 	    return response.json();
-	 })
+   })
 	
     .then(function(data) {
+      $('#foodList').append(`ddjjdj`)
     	console.log(data);
-    	let cols = 0;
     	let index = 0;
       	$.each(data.hits, function(i, food) {
       	 	index = i + 1;
-	        if (cols == 0) {
-			      $("#listFood").append('<div class="row listImg"></div>');
-			    }
+			    $("#foodList").append('<div class="row listImg"></div>');
 
 		    let image = food.recipe.image;
-		    let name = food.recipe.label;
-
-		    $("#listFood .row").last().append(`<div class="col-xs-12 col-md-4 imgcont" data-index="${index}"><div class="img-thumbnail"><figure>
-		    							<img src="${image}" class="img-${index}" data-toggle="modal" data-target="#modalLocal"">
-		    							</figure></div>
-		    							<figcaption class="text text-${index} text-center">${name}</figcaption></div>`);
-
-		    $('.text').hide();
-
-
-
-			cols +=1;
-			console.log(cols)
-
-    		if (cols == 3) {
-    			console.log(cols)
-      			cols = 0;
-    		}
-
-		      
+        let name = food.recipe.label;
+        
+        $('#foodList .row').append(`<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 imgcont" data-index="${index}">
+                                    <div class="card mb-3">
+                                    <img class="card-img-top img-${index}" src="${image}">
+                                    <div class="card-body">
+                                    <h5 class="card-title text-${index}">${name}</h5>
+                                    <p class="card-text">
+                                    <small class="text-muted">${food.recipe.dietLabels}</small>
+                                    </p>
+                                    </div>
+                                    </div>
+                                    </div>`);
 		});
 		$('.imgcont').mouseover(getInImg);
 		$('.imgcont').mouseleave(getOutImg);
-
     });
-
-
 }
 
 function getInImg() {
