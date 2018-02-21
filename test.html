@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>prueba</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+    crossorigin="anonymous">
+	<link rel="stylesheet" href="test.css">
+</head>
+<body>
+	<div id="registry">
+		<input type="text" class="mar rounded" placeholder="Email" id="email">
+	    <input type="password" class="mar rounded" placeholder="Password" id="pw">
+
+	    
+		<!-- ingresar -->
+		<button class="btn btn-success mar rounded" id="login-btn">Log in</button>
+
+		<!-- registro -->
+	    <button class="btn btn-primary mar rounded" id="signup-btn">Sign up</button>
+
+	</div>
+
+	<div id="home">
+		<!--  buscardor de recetas -->
+	    <input type="text" class="search" placeholder="Busca tu receta" id="searchRecetas">
+	    <button class="btn btn-success mar rounded" id="btnSearch">Search</button>
+
+	    <div class="row space">
+      		<div class="col-md-12">
+			    <div id="carouselExampleControls" class="carousel slide multi-item-carousel" data-ride="carousel">
+				  <div class="carousel-inner">
+				    <div class="carousel-item active">
+				    	<div class="col-4 portafolio">
+		                <div class="outline text-center">
+		                  <a href="#"><img class="d-block w-100" src="..." alt="First slide"></a>
+		                  <h3>Card title</h3>
+		                  
+		                </div>
+		              </div>
+		                   
+				    </div>
+				    <div class="carousel-item">
+		              <div class="col-4 portafolio">
+		                <div class="outline text-center">
+		                  <a href=""><img class="d-block w-100" src="..." alt="Third slide"></a>
+				      
+		                  <h3>Card title</h3>
+		                  
+		                </div>
+		              </div>
+		            </div>
+		            <div class="carousel-item">
+		              <div class="col-4 portafolio">
+		                <div class="outline text-center">
+		                  <a href="#" id="terror" value=""><img class="portafolio-contenedor imgCarrusel img-responsive" src="assets/images/coder.jpg"></a>
+		                  <h3>Card title</h3>
+		                  
+		                </div>
+		              </div>
+		            </div>
+				    
+				    <div class="carousel-item">
+		              <div class="col-4 portafolio">
+		                <div class="outline text-center">
+		                  <a href="#" id="terror" value=""><img class="portafolio-contenedor imgCarrusel img-responsive" src="assets/images/coder.jpg"></a>
+		                  <h3>Card title</h3>
+		                  
+		                </div>
+		              </div>
+		            </div>
+		            <div class="carousel-item">
+		              <div class="col-4 portafolio">
+		                <div class="outline text-center">
+		                  <a href="#" id="terror" value=""><img class="portafolio-contenedor imgCarrusel img-responsive" src="assets/images/coder.jpg"></a>
+		                  <h3>Card title</h3>
+		                </div>
+		              </div>
+		            </div>
+		            <div class="carousel-item">
+		              <div class="col-4 portafolio">
+		                <div class="outline text-center">
+		                  <a href="#" id="terror" value=""><img class="portafolio-contenedor imgCarrusel img-responsive" src="assets/images/coder.jpg"></a>
+		                  <h3>Card title</h3>
+		                </div>
+		              </div>
+		            </div>
+		            <div class="carousel-item">
+		              <div class="col-4 portafolio">
+		                <div class="outline text-center">
+		                  <a href="#" id="terror" value=""><img class="portafolio-contenedor imgCarrusel img-responsive" src="assets/images/coder.jpg"></a>
+		                  <h3>Card title</h3>
+		                </div>
+		              </div>
+		            </div>
+				  </div>
+
+				  
+				  <a class="carousel-control-prev left carousel-control" href="#carouselExampleControls" role="button" data-slide="prev">
+				    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				    <span class="sr-only">Previous</span>
+				  </a>
+				  <a class="carousel-control-next right carousel-control" href="#carouselExampleControls" role="button" data-slide="next">
+				    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+				    <span class="sr-only">Next</span>
+				  </a>
+				</div>
+			</div>
+    </div>
+
+	    
+
+	   
+
+	    <div id="listFood" class="container"></div>
+	</div>
+ 
+
+   <!--  <script
+    src="http://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9l/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script> -->
+    <script src="https://www.gstatic.com/firebasejs/4.10.0/firebase.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <script src="assets/js/main.js"></script>
+
+
+	<script>
+	  // Initialize Firebase
+	  var config = {
+	    apiKey: "AIzaSyDOCBqbgbhDTdscqXRmlmtaTAD_hoNiMlY",
+	    authDomain: "ricas-recetas.firebaseapp.com",
+	    databaseURL: "https://ricas-recetas.firebaseio.com",
+	    projectId: "ricas-recetas",
+	    storageBucket: "ricas-recetas.appspot.com",
+	    messagingSenderId: "435045347580"
+	  };
+	  firebase.initializeApp(config);
+	</script>
+    <script src="assets/js/app.js"></script>
+
+</body>
+</html>
