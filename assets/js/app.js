@@ -1,11 +1,4 @@
 $(document).ready(() => { 
-	fetch('https://api.edamam.com/search?q='+ randomize() +'&app_id=01dfc015&app_key=ab3ca8c9eb858e5904ba8bc581944e8e&from=0&to=7&calories=gte%20591,%20lte%20722&health=alcohol-free').then(function(response) {
-	    return response.json();
-	 })
-	
-    .then(function(data) {
-    	console.log(data);
-    });
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
     	$('#registry').hide()
@@ -37,27 +30,44 @@ function signup() {
   }
 }
 
-// Instantiate the Bootstrap carousel
-$('.multi-item-carousel').carousel({
-  interval: false
-});
+fetch('https://api.edamam.com/search?q='+ randomize() +'&app_id=01dfc015&app_key=ab3ca8c9eb858e5904ba8bc581944e8e&from=0&to=9&calories=gte%20591,%20lte%20722&health=alcohol-free').then(function(response) {
+	    return response.json();
+	 })
+	
+    .then(function(data) {
+    	console.log(data);
+    	let cols = 0;
+    	let index = 0;
+
+    	$.each(data.hits, function(i, food) {
+	        if (cols == 0) {
+	        		index += 1;
+			      $(".carousel-inner").append(`<div class="carousel-item img-carousel-${index}"><div class="row"></div>`);
+			    }
+
+		    let image = food.recipe.image;
+		    let name = food.recipe.label;
+
+		    $(".img-carousel-"+index + " .row").last().append(`<div class="col-4 recetasRecomendadas">
+				              		<div class="img-thumbnail text-center">
+				                	<a href=""><img class="d-block w-100" src="${image}"></a>
+				                	<div class="carousel-caption d-none d-md-block">
+								    	<h5>${name}</h5>
+								 	</div></div></div>`);
 
 
-// para cada diapositiva en el carrusel, copie el ítem de la siguiente diapositiva en la diapositiva.
-// Haz lo mismo para el próximo, siguiente artículo.
-$('.multi-item-carousel .carousel-item').each(function() {
-  var next = $(this).next();
-  if (!next.length) {
-    next = $(this).siblings(':first');
-  }
-  next.children(':first-child').clone().appendTo($(this));
-  
-  if (next.next().length > 0) {
-    next.next().children(':first-child').clone().appendTo($(this));
-  } else {
-    $(this).siblings(':first').children(':first-child').clone().appendTo($(this));
-  }
-});
+		    cols +=1;
+    		if (cols == 3) {
+      			cols = 0;
+    		}
+    	});
+
+    	$('.img-carousel-1').addClass('active');
+
+    });
+
+
+$('.carousel').carousel();
 
 
 function randomize() {
