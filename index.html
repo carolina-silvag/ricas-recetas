@@ -33,7 +33,7 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <a class="dropdown-item" href="#">Profile</a>
-                  <a class="dropdown-item" href="#">My recipes</a>
+                  <a class="dropdown-item" href="#" id="btn-myRecipes">My recipes</a>
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="#" id="logout-btn">Log out</a>
                 </div>
@@ -73,13 +73,6 @@
         <div class="col-lg-10 col-md-10 col-sm-12 col-12">
           <div id="search_recipe" class="text-center">
             <input id="searchRecetas" type="text" placeholder="Search Recipe">
-            <div id="filters">
-              <input type="checkbox" name="" id="">
-              <label for="">Low-carb</label>
-
-              <input type="checkbox" name="" id="">
-              <label for=""></label>
-            </div>
           </div>
         </div>
       </div>
@@ -89,6 +82,10 @@
         </div>
       </div>
     </div>
+  </section>
+
+  <section id="myRecipes">
+    <div class="row listImg"></div>
   </section>
 
   <section>
@@ -137,7 +134,27 @@
     </div>
   </section>
 
- 
+  <div id="info_modal" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="save_recipe">Save recipe</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
   <script src="https://www.gstatic.com/firebasejs/4.10.0/firebase.js"></script>
 
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

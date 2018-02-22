@@ -347,6 +347,7 @@ function cargar() {
 
 		    let image = misRecetas.image;
 	        let name = misRecetas.label;
+	        let receta = misRecetas.ingredientLines
     		console.log(image, name, i);
         
 	        $('#myRecipes .listImg').append(`<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 imgcont" data-index="${index}">
@@ -355,7 +356,8 @@ function cargar() {
 		                                      <img class="img img-thumbnail" data-name="${index}" src="${image}">
 		                                    </div>
 		                                    <div class=" col-7">
-		                                        <h5 class="text">${name}</h5>  
+		                                        <h5 class="text">${name}</h5> 
+		                                        <p>${receta}</p> 
 		                                    </div>
 	                                     </div>
 	                     

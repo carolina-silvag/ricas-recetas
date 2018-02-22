@@ -4,7 +4,7 @@ $(document).ready(() => {
       $('#registry').hide();
       $('#menuNavbar').show();
       $('#nav-search').show();
-      console.log(user.uid)
+      loadCurrentUser(user.uid);
     } else {
       $('#nav-search').hide();
       $('#menuNavbar').hide();
@@ -15,6 +15,9 @@ $(document).ready(() => {
     }
   }); // firebase
 });
+
+var database = firebase.database();
+var user = null;
 
 function login() {
   let email = $('#email-login').val();
@@ -55,7 +58,7 @@ function ajustePantallaPequeña() {
 
 			$.each(data.hits, function(i, food) {
 	      index += 1;
-			  $(".carousel-inner").append(`<div class="carousel-item img-carousel-${index}"><div class="row justify-content-center"></div>`)+
+			  $(".carousel-inner").append(`<div class="carousel-item img-carousel-${index}"><div class="row justify-content-center"></div>`);
 			 
 
 		    let image = food.recipe.image;
@@ -162,13 +165,13 @@ function setSearch(search) {
     	let index = 0;
       	$.each(data.hits, function(i, food) {
         index = i + 1;
-        filterElements(data);
         $('#foodList').append('<div class="row listImg"></div>');
     
 
         let recipe = food.recipe;
         
         $('#foodList .row').append(`<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 imgcont" data-index="${index}">
+
                                     <div class="card mb-3">
                                     <img class="card-img-top img-${index}" src="${recipe.image}">
                                     <div class="card-body">
@@ -187,13 +190,21 @@ function setSearch(search) {
                                     </div>
                                     </div>
                                     </div>`);
-		  });
-		  $('.imgcont').mouseover(getInImg);
-		  $('.imgcont').mouseleave(getOutImg);
-    });
+      // llama a la funcion cuando pasar por la imagen
+  		$('.imgcont').mouseover(getInImg);
+      // llama a la funcion cuando sale de la imagen
+  		$('.imgcont').mouseleave(getOutImg);
+
+      //
+      $('#foodList .card').click(showInfo);
+  
+      });
+   });
+
 }
 
 function cautions(recipe) {
+
   if (recipe.cautions.length !== 0) {
     return `<i style="margin: 0 5px;" class="fas fa-exclamation-triangle"></i><small class="text-muted">${recipe.cautions}</small>`;
   } else {
@@ -206,12 +217,6 @@ function diet(recipe) {
     return `<i style="margin: 0 5px;" class="fas fa-heartbeat"></i><small class="text-muted">${recipe.dietLabels}</small>`;
   } else {
     return ' ';
-  }
-}
-
-function filterElements(data) {
-  if (data.dietLabels.indexOf('Low-Fat') === -1) {
-
   }
 }
 
@@ -254,4 +259,100 @@ function getOutImg() {
   $('.img-'+index).css({'filter': 'brightness(100%)', 
     '-webkit-filter': 'brightness(100%)'});
 }
+
+//
+
+function showInfo() {
+  let index = $(this).parent().data('index');
+  var name = $('.text-'+index).text();
+  console.log(name)
+  fetch('https://api.edamam.com/search?q=' + name + '&app_id=01dfc015&app_key=ab3ca8c9eb858e5904ba8bc581944e8e&from=0&to=100&calories=gte%20591,%20lte%20722&health=alcohol-free').then(function(response) {
+      return response.json();
+   })
+  
+    .then(function(data) {
+      console.log('es mio',data)
+      const recipe = data.hits[0].recipe;
+      $('#info_modal .modal-title').text(recipe.label);
+      $('#info_modal .modal-body').text(recipe.ingredientLines);
+
+      $('#info_modal').modal();
+
+      // llama a la funcion para guardar recetas
+      $('.save_recipe').click(appendReceta);
+    });
+}
+
+// agregando recetas a firebase
+function appendReceta() {
+  let index = $(this).parent().data('index');
+  var name = $('.text-'+index).html();
+  fetch('https://api.edamam.com/search?q='+name+'&app_id=01dfc015&app_key=ab3ca8c9eb858e5904ba8bc581944e8e&from=0&to=9&calories=gte%20591,%20lte%20722&health=alcohol-free').then(function(response) {
+      return response.json();
+   })
+  
+    .then(function(data) {
+      console.log('uno solo',data);
+      console.log(data.hits)
+      let dataReceta = data.hits[0].recipe;
+
+      let uid = user;
+      database.ref('/recetas/'+uid+'/'+dataReceta.label).set(dataReceta);
+    });
+}
+
+
+function loadCurrentUser(uid) {
+  console.log('buscando ', uid);
+  user = uid;
+  /*database.ref('/user/'+uid).on("value", function(data) {
+    var user = data.val();
+    currentUser = user;
+    var divUserName = $('#user-name');
+    var divUserPic = $('#user-pic');
+    divUserName.html(user.name);
+    divUserName.removeAttr('hidden');
+    divUserPic.find('img').attr({
+      src: user.photoURL
+    });
+    divUserPic.removeAttr('hidden');
+  });*/
+}
+
+$('#btn-myRecipes').click(cargar);
+
+function cargar() {
+  let uid = user;
+  database.ref('/recetas/'+uid).on('value', function(data) {
+    $('#home').hide();
+    $('#myRecipes').show();
+    $('#myRecipes .row').html("");
+      var misRecetas = data.val();
+      $.each(misRecetas, function(i, misRecetas) {
+
+          index = i + 1;
+
+        let image = misRecetas.image;
+          let name = misRecetas.label;
+          let receta = misRecetas.ingredientLines;
+        console.log(image, name, i);
+        
+          $('#myRecipes .listImg').append(`<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 imgcont" data-index="${index}">
+                                      <div class="row" id="calificar">
+                                        <div class="col-5">
+                                          <img class="img img-thumbnail" data-name="${index}" src="${image}">
+                                        </div>
+                                        <div class=" col-7">
+                                            <h5 class="text">${name}</h5> 
+                                            <p>${receta}</p> 
+                                        </div>
+                                       </div>
+                       
+                                    </div>`);
+    });
+
+
+  });
+}
+
 
