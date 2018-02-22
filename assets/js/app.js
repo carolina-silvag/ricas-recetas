@@ -142,28 +142,35 @@ $('#searchRecetas').on('keypress', function(event) {
 function setSearch(search) {
   $('#carrousel').hide()
 	$('#foodList').html("");
-	fetch('https://api.edamam.com/search?q='+ search +'&app_id=01dfc015&app_key=ab3ca8c9eb858e5904ba8bc581944e8e&from=0&to=100&calories=gte%20591,%20lte%20722&health=alcohol-free').then(function(response) {
+	fetch('https://api.edamam.com/search?q='+ search +'&app_id=01dfc015&app_key=ab3ca8c9eb858e5904ba8bc581944e8e&from=0&to=3&calories=gte%20591,%20lte%20722&health=alcohol-free').then(function(response) {
 	    return response.json();
    })
 	
     .then(function(data) {
-      $('#foodList').append(`ddjjdj`)
     	console.log(data);
     	let index = 0;
       	$.each(data.hits, function(i, food) {
-      	 	index = i + 1;
-			    $("#foodList").append('<div class="row listImg"></div>');
+           index = i + 1;
+           filterElements(data)
+          $("#foodList").append('<div class="row listImg"></div>');
 
-		    let image = food.recipe.image;
-        let name = food.recipe.label;
+          let recipe = food.recipe
         
-        $('#foodList .row').append(`<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 imgcont" data-index="${index}">
+        $('#foodList .row').append(`<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 imgcont" data-index="${index}">
                                     <div class="card mb-3">
-                                    <img class="card-img-top img-${index}" src="${image}">
+                                    <img class="card-img-top img-${index}" src="${recipe.image}">
                                     <div class="card-body">
-                                    <h5 class="card-title text-${index}">${name}</h5>
+                                    <h5 class="card-title text-${index}">${recipe.label}</h5>
                                     <p class="card-text">
-                                    <small class="text-muted">${food.recipe.dietLabels}</small>
+                                    <table class="table table-sm">
+                                    <tr>
+                                    <td>${diet(recipe)}</td>
+                                    <td class="text-right">${cautions(recipe)}</td>
+                                    </tr>
+                                    </table>
+                                    </p>
+                                    <p class="card-text">
+                                    <small class="text-muted">${Math.round(recipe.calories)} calories</small>
                                     </p>
                                     </div>
                                     </div>
@@ -172,6 +179,28 @@ function setSearch(search) {
 		$('.imgcont').mouseover(getInImg);
 		$('.imgcont').mouseleave(getOutImg);
     });
+}
+
+function cautions(recipe) {
+  if (recipe.cautions.length !== 0) {
+    return `<i style="margin: 0 5px;" class="fas fa-exclamation-triangle"></i><small class="text-muted">${recipe.cautions}</small>`;
+  } else {
+    return ' ';
+  }
+}
+
+function diet(recipe) {
+  if (recipe.dietLabels.length !== 0) {
+    return `<i style="margin: 0 5px;" class="fas fa-heartbeat"></i><small class="text-muted">${recipe.dietLabels}</small>`;
+  } else {
+    return ' ';
+  }
+}
+
+function filterElements(data) {
+  $('#foodList').append(`<div class="row"><div class="col-lg-10 col-md-10 col-sm-12 col-12>
+  <input type="text">
+  </div></div>`)
 }
 
 function getInImg() {

@@ -3,21 +3,10 @@ body {
     background: rgba(0, 255, 0, 0.166);
 }
 
-#carrousel {
-    width: 100%;
-    height: 40vh;
-    margin: 3em 0;
-    background: green;
-}
-
-#search_recipe {
-    height: 20vh;
-    margin: 0.5em 0;
-}
-
-#search_recipe input {
+#searchRecetas {
     width: 100%;
     padding: 0.5em 1em;
+    margin: 0.5em;
     font-size: 1.5em;
     border: none;
     border-radius: 1em;
@@ -34,6 +23,25 @@ nav {
 
 #foodList .card {
     cursor: pointer;
+}
+
+#foodList .card table {
+    font-size: 1.1em;
+}
+
+#foodList .card table td:first-child {
+    color: green;
+}
+
+#foodList .card table td:nth-child(2) {
+    color: red;
+}
+
+#foodList .card p small {
+    background: rgb(247, 255, 247);
+    padding: 4px;
+    border: 1px dashed green;
+    border-radius: 4px;
 }
 
 /*desde aqui clases del carrusel*/
