@@ -1,85 +1,171 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>prueba</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
     crossorigin="anonymous">
-	<link rel="stylesheet" href="test.css">
+  <link rel="stylesheet" href="assets/css/main.css">
 </head>
+
 <body>
-	<div id="registry">
-		<input type="text" class="mar rounded" placeholder="Email" id="email">
-	    <input type="password" class="mar rounded" placeholder="Password" id="pw">
 
-	    
-		<!-- ingresar -->
-		<button class="btn btn-success mar rounded" id="login-btn">Log in</button>
 
-		<!-- registro -->
-	    <button class="btn btn-primary mar rounded" id="signup-btn">Sign up</button>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+          aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <li class="nav-item dropdown" id="menuNavbar">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                  aria-expanded="false">
+                  More
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="#">Profile</a>
+                  <a class="dropdown-item" href="#">My recipes</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#" id="logout-btn">Log out</a>
+                </div>
+              </li>
+          </ul>
+          <form class="form-inline my-2 my-lg-0" id="registry">
+            <button type="button" class="btn btn-outline-success my-2 my-sm-0" data-toggle="modal" data-target="#modalLog-in">Log in</button>
+            <button type="button" class="btn btn-outline-success my-2 my-sm-0" data-toggle="modal" data-target="#modalSing-up">Sign up</button>
+          </form>
+          <!-- <form class="form-inline my-2 my-lg-0" id="nav-search">
+            <input class="form-control mr-sm-2 searchRecetas" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0 btnSearch" type="submit">Search</button>
+          </form> -->
+        </div>
+    </div>
+  </nav>
+  <section id="home">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+          <div id="carouselExampleControls" class="carousel slide multi-item-carousel" data-ride="carousel">
+          <div class="carousel-inner">   
+            </div>
+          </div>
+          <a class="carousel-control-prev left carousel-control" href="#carouselExampleControls" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next right carousel-control" href="#carouselExampleControls" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-lg-10 col-md-10 col-sm-12 col-12">
+          <div id="search_recipe" class="text-center">
+            <input id="searchRecetas" type="text" placeholder="Search Recipe">
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-lg-10 col-md-10 col-sm-12 col-12">
+          <section id="foodList"></section>
+        </div>
+      </div>
+    </div>
+  </section>
 
-	</div>
+  <section>
 
-	<div id="home">
-		<!--  buscardor de recetas -->
-	    <input type="text" class="search" placeholder="Busca tu receta" id="searchRecetas">
-	    <button class="btn btn-success mar rounded" id="btnSearch">Search</button>
-
-	    <div class="row container-fluid justify-content-center">
-      		<div class="col-md-12">
-			    <div id="carouselExampleControls" class="carousel slide multi-item-carousel" data-ride="carousel">
-				  <div class="carousel-inner">   
-				    </div>
-				  </div>
-				  <a class="carousel-control-prev left carousel-control" href="#carouselExampleControls" role="button" data-slide="prev">
-				    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-				    <span class="sr-only">Previous</span>
-				  </a>
-				  <a class="carousel-control-next right carousel-control" href="#carouselExampleControls" role="button" data-slide="next">
-				    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-				    <span class="sr-only">Next</span>
-				  </a>
-				</div>
-			</div>
+    <!-- Modal Ingreso -->
+    <div class="modal fade" id="modalLog-in" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <input class="form-control mr-sm-2" type="email" id="email-login" placeholder="Email" aria-label="Email">
+            <input class="form-control mr-sm-2" type="password" id="pw-login" placeholder="Password" aria-label="Password">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="login-btn">Log in</button>
+          </div>
+        </div>
+      </div>
     </div>
 
-	    
+    <!-- Modal Registro -->
+    <div class="modal fade" id="modalSing-up" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <input class="form-control mr-sm-2" type="email" id="email-signup" placeholder="Email" aria-label="Email">
+            <input class="form-control mr-sm-2" type="password" id="pw-signup" placeholder="Password" aria-label="Password">
 
-	   
+          </div>
+          <div class="modal-footer text-center">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="signup-btn">Sing up</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-	    <div id="listFood" class="container"></div>
-	</div>
- 
+  <!--<section id="my_recipes">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+          <div class="card mb-3">
+            <img class="card-img-top" src="assets/img/recipe_sample.jpg" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">
+                <small class="text-muted">Added 3 mins ago</small>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>-->
 
-   <!--  <script
-    src="http://code.jquery.com/jquery-3.3.1.min.js"
-    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-    crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9l/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script> -->
-    <script src="https://www.gstatic.com/firebasejs/4.10.0/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.10.0/firebase.js"></script>
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
-    <script src="assets/js/main.js"></script>
-
-
-	<script>
-	  // Initialize Firebase
-	  var config = {
-	    apiKey: "AIzaSyDOCBqbgbhDTdscqXRmlmtaTAD_hoNiMlY",
-	    authDomain: "ricas-recetas.firebaseapp.com",
-	    databaseURL: "https://ricas-recetas.firebaseio.com",
-	    projectId: "ricas-recetas",
-	    storageBucket: "ricas-recetas.appspot.com",
-	    messagingSenderId: "435045347580"
-	  };
-	  firebase.initializeApp(config);
-	</script>
-    <script src="assets/js/app.js"></script>
-
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyDOCBqbgbhDTdscqXRmlmtaTAD_hoNiMlY",
+      authDomain: "ricas-recetas.firebaseapp.com",
+      databaseURL: "https://ricas-recetas.firebaseio.com",
+      projectId: "ricas-recetas",
+      storageBucket: "ricas-recetas.appspot.com",
+      messagingSenderId: "435045347580"
+    };
+    firebase.initializeApp(config);
+  </script>
+  <script src="test.js"></script>
 </body>
+
 </html>

@@ -4,17 +4,24 @@ $(document).ready(() => {
       $('#registry').hide();
       $('#menuNavbar').show();
       $('#nav-search').show();
+      loadCurrentUser(user.uid);
       console.log(user.uid)
     } else {
       $('#nav-search').hide();
       $('#menuNavbar').hide();
       $('#registry').show();
+      $('#icoGoogle').click(ingresoGoogle);
+	  $('#icoFacebook').click(ingresoFacebook);
       $('#login-btn').click(login);
       $('#signup-btn').click(signup);
       $('#logout-btn').click(logout);
     }
   }); // firebase
 });
+
+var database = firebase.database();
+var user = null;
+
 
 function login() {
   let email = $('#email-login').val();
@@ -36,6 +43,78 @@ function signup() {
 
 function logout() {
   firebase.auth().signOut();
+}
+
+function ingresoGoogle() {
+  if(!firebase.auth().currentUser){
+    var provider = new firebase.auth.GoogleAuthProvider();
+
+    provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
+
+
+    firebase.auth().signInWithPopup(provider).then(function(result){
+
+      var token = result.credential.accesstoken;
+
+      var user = result.user;
+      var name = result.user.displayName;
+
+      agregarUserBD(user);
+      window.location.href = 'movie.html';
+
+    }).catch(function(error) {
+      console.log("error", error.message);
+      var errorCode = error.Code;
+
+      var errorMessage = error.message;
+
+      var errorEmail = error.email;
+
+      var errorCredential = error.credential;
+
+      if(errorCode === 'auth/account-exists-with-different-credential'){
+        alert('Es el mismo usuario');
+      }
+    });
+  }else {
+    firebase.auth().signOut();
+  }
+}
+
+function ingresoFacebook() {
+  if(!firebase.auth().currentUser){
+    var provider = new firebase.auth.FacebookAuthProvider();
+
+    provider.addScope('public_profile');
+
+
+    firebase.auth().signInWithPopup(provider).then(function(result){
+
+      var token = result.credential.accesstoken;
+
+      var user = result.user;
+      console.log(user);
+      agregarUserBD(user);
+
+      /*window.location.href = 'movie.html';*/
+
+    }).catch(function(error) {
+      console.log("error", error.message);
+      var errorCode = error.Code;
+
+      var errorMessage = error.message;
+
+      var errorEmail = error.email;
+
+      var errorCredential = error.credential;
+
+      if(errorCode === 'auth/account-exists-with-different-credential'){
+        alert('Es el mismo usuario');
+      }
+    });
+  }else {
+    firebase.auth().signOut();
+  }
 }
 
 if (screen.width<1024) {
@@ -162,10 +241,10 @@ function setSearch(search) {
         let name = food.recipe.label;
         
         $('#foodList .row').append(`<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 imgcont" data-index="${index}">
-                                    <div class="card mb-3 card-${index} img-thumbnail">
+                                    <div class="card mb-3 card-${index} img-thumbnail" id="guardar">
                                       <img class="card-img-top img-${index}" src="${image}">
                                       <div class="card-body">
-                                        <h5 class="card-title text-${index}">${name}</h5>
+                                        <h5 class="card-title text-${index}" value="${name}">${name}</h5>
                                         <p class="card-text">
                                           <small class="text-muted">${food.recipe.dietLabels}</small>
                                         </p>
@@ -177,6 +256,8 @@ function setSearch(search) {
 		$('.imgcont').mouseover(getInImg);
     // llama a la funcion cuando sale de la imagen
 		$('.imgcont').mouseleave(getOutImg);
+	// llama a la funcion para guardar recetas
+		$('.imgcont').click(appendReceta);
     });
 }
 
@@ -216,3 +297,38 @@ function getOutImg() {
     '-webkit-filter': 'brightness(100%)'});
 }
 
+// agregando recetas a firebase
+function appendReceta() {
+	let index = $(this).data('index');
+	var name = $('.text-'+index).html();
+	fetch('https://api.edamam.com/search?q='+name+'&app_id=01dfc015&app_key=ab3ca8c9eb858e5904ba8bc581944e8e&from=0&to=9&calories=gte%20591,%20lte%20722&health=alcohol-free').then(function(response) {
+	    return response.json();
+	 })
+	
+    .then(function(data) {
+    	console.log('uno solo',data);
+    	console.log(data.hits)
+    	let dataReceta = data.hits[0].recipe;
+
+    	let uid = user;
+  		database.ref("/recetas/"+uid+"/"+dataReceta.label).set(dataReceta);
+    });
+}
+
+
+function loadCurrentUser(uid) {
+  console.log('buscando ', uid);
+  user = uid;
+  /*database.ref('/user/'+uid).on("value", function(data) {
+    var user = data.val();
+    currentUser = user;
+    var divUserName = $('#user-name');
+    var divUserPic = $('#user-pic');
+    divUserName.html(user.name);
+    divUserName.removeAttr('hidden');
+    divUserPic.find('img').attr({
+      src: user.photoURL
+    });
+    divUserPic.removeAttr('hidden');
+  });*/
+}
