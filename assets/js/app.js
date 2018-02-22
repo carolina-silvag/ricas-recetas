@@ -12,6 +12,10 @@ $(document).ready(() => {
       $('#login-btn').click(login);
       $('#signup-btn').click(signup);
       $('#logout-btn').click(logout);
+      $('#google-btn1').click(ingresoGoogle);
+      $('#facebook-btn1').click(ingresoFacebook);
+      $('#google-btn2').click(ingresoGoogle);
+      $('#facebook-btn2').click(ingresoFacebook);
     }
   }); // firebase
 });
@@ -39,6 +43,57 @@ function signup() {
 
 function logout() {
   firebase.auth().signOut();
+}
+
+function ingresoGoogle() {
+  if(!firebase.auth().currentUser){
+    var provider = new firebase.auth.GoogleAuthProvider();
+    provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
+    firebase.auth().signInWithPopup(provider).then(function(result){
+      var token = result.credential.accesstoken;
+      var user = result.user;
+      var name = result.user.displayName;
+      agregarUserBD(user);
+    }).catch(function(error) {
+      console.log("error", error.message);
+      var errorCode = error.Code;
+      var errorMessage = error.message;
+      var errorEmail = error.email;
+      var errorCredential = error.credential;
+      if(errorCode === 'auth/account-exists-with-different-credential'){
+        alert('Es el mismo usuario');
+      }
+    });
+  }else {
+    firebase.auth().signOut();
+  }
+}
+
+function ingresoFacebook() {
+  if(!firebase.auth().currentUser){
+    var provider = new firebase.auth.FacebookAuthProvider();
+    provider.addScope('public_profile');
+    firebase.auth().signInWithPopup(provider).then(function(result){
+      var token = result.credential.accesstoken;
+      var user = result.user;
+      console.log(user);
+      agregarUserBD(user);
+
+      /*window.location.href = 'movie.html';*/
+
+    }).catch(function(error) {
+      console.log("error", error.message);
+      var errorCode = error.Code;
+      var errorMessage = error.message;
+      var errorEmail = error.email;
+      var errorCredential = error.credential;
+      if(errorCode === 'auth/account-exists-with-different-credential'){
+        alert('Es el mismo usuario');
+      }
+    });
+  }else {
+    firebase.auth().signOut();
+  }
 }
 
 if (screen.width < 1024) {
