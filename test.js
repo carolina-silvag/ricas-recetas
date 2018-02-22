@@ -60,7 +60,6 @@ function ingresoGoogle() {
       var name = result.user.displayName;
 
       agregarUserBD(user);
-      window.location.href = 'movie.html';
 
     }).catch(function(error) {
       console.log("error", error.message);
@@ -331,4 +330,38 @@ function loadCurrentUser(uid) {
     });
     divUserPic.removeAttr('hidden');
   });*/
+}
+
+$('#btn-myRecipes').click(cargar);
+
+function cargar() {
+	let uid = user;
+	database.ref('/recetas/'+uid).on("value", function(data) {
+		$('#home').hide();
+		$('#myRecipes').show();
+		$('#myRecipes .row').html("");
+    	var misRecetas = data.val();
+    	$.each(misRecetas, function(i, misRecetas) {
+
+      	 	index = i + 1;
+
+		    let image = misRecetas.image;
+	        let name = misRecetas.label;
+    		console.log(image, name, i);
+        
+	        $('#myRecipes .listImg').append(`<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 imgcont" data-index="${index}">
+	                                    <div class="row" id="calificar">
+		                                    <div class="col-5">
+		                                      <img class="img img-thumbnail" data-name="${index}" src="${image}">
+		                                    </div>
+		                                    <div class=" col-7">
+		                                        <h5 class="text">${name}</h5>  
+		                                    </div>
+	                                     </div>
+	                     
+	                                  </div>`);
+		});
+
+
+  });
 }

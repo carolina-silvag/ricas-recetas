@@ -12,6 +12,19 @@
 </head>
 
 <body>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	  <a class="navbar-brand" href="#">Navbar</a>
+	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+	    <span class="navbar-toggler-icon"></span>
+	  </button>
+	  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+	    <div class="navbar-nav pull-md-right">
+	      <a class="nav-item nav-link active" href="#">Home<span class="sr-only">(current)</span></a>
+	      <a class="nav-item nav-link" href="#">Features</a>
+	      <a class="nav-item nav-link" href="#">Pricing</a>
+	    </div>
+	  </div>
+	</nav>
 
 
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -23,7 +36,7 @@
         </button>
     
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
+          <ul class="navbar-nav pull-xs-left">
             <li class="nav-item">
               <li class="nav-item dropdown" id="menuNavbar">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
@@ -32,7 +45,7 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <a class="dropdown-item" href="#">Profile</a>
-                  <a class="dropdown-item" href="#">My recipes</a>
+                  <a class="dropdown-item" href="#" id="btn-myRecipes">My recipes</a>
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="#" id="logout-btn">Log out</a>
                 </div>
@@ -82,8 +95,9 @@
       </div>
     </div>
   </section>
-
-  <section>
+  <section id="myRecipes">
+	<div class="row listImg"></div>
+  </section>
 
     <!-- Modal Ingreso -->
     <div class="modal fade" id="modalLog-in" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
