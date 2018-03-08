@@ -7,8 +7,20 @@ nav {
   z-index: 5;
 }
 
+.container {
+  padding: 0;
+}
+
 section .container {
   background-color: #ecee98;
+}
+
+#intro {
+  padding: 0;
+  margin: 0;  
+  background-image: url('../img/fondo1.jpg');
+  width:100%;
+  height: 400px;
 }
 /*.navbar {
   background-color: #0D5839 !important;

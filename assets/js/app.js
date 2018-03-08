@@ -113,18 +113,25 @@ function ajustePantallaPequeña() {
 
 			$.each(data.hits, function(i, food) {
 	      index += 1;
-			  $(".carousel-inner").append(`<div class="carousel-item img-carousel-${index}"><div class="row justify-content-center"></div>`);
+        /*<div class="carousel-item active">
+                <img src="..." alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                  <h5>...</h5>
+                  <p>...</p>
+                </div>
+              </div>*/
+			  $(".carousel-inner").append(`<div class="carousel-item img-carousel-${index}"></div>`);
 			 
 
 		    let image = food.recipe.image;
 		    let name = food.recipe.label;
 
-		    $('.img-carousel-' + index + ' .row').last().append(`<div class="col-xs-12 recetasRecomendadas">
-				              		<div class="img-thumbnail text-center">
+		    $('.img-carousel-' + index).last().append(`
 				                	<a href=""><img class="d-block w-100" src="${image}"></a>
-				                	<div class="carousel-caption d-none d-md-block">
-								    	    <h5>${name}</h5>
-								 	        </div></div></div>`);
+                          <div class="carousel-caption d-none d-md-block">
+                            <h5>${name}</h5>
+                            <p>...</p>
+                          </div>`);
     	});
     	$('.img-carousel-1').addClass('active');
     });
