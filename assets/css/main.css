@@ -1,15 +1,72 @@
 body {
   height: 100vh;
-  background: rgba(0, 255, 0, 0.166);
+  background-color: #BFC169;
 }
 
 nav {
   z-index: 5;
 }
 
+section .container {
+  background-color: #ecee98;
+}
+/*.navbar {
+  background-color: #0D5839 !important;
+}*/
+.navbar-brand {
+  padding: 0 !important; 
+}
+.imgNav {
+  width: 80%;
+}
+
 #registry button {
   margin: 0 0.5em;
 }
+
+.filtro li {
+  display: inline-block;
+}
+
+.filtroCategoria {
+  margin: 0 !important;
+  padding: 0 !important ;    
+}
+
+.dulce {
+  background-color:#ad1557;
+}
+.arroz {
+  background-color:#8e75b3;
+}
+.cereal {
+  background-color:#9e9d24;
+}
+.vegetal {
+  background-color:#1c5f2b;
+}
+.pollo {
+  background-color:#ef7c0f;
+}
+.pasta {
+  background-color:#e64a1a;
+}
+.carne {
+  background-color: #c72828;
+}
+.sopa {
+  background-color: #88acdc;
+}
+.huevo {
+  background-color: #f7a943;
+}
+.pan {
+  background-color: #f7e143;
+}
+/*.intro {
+  width: 100%;
+  height: 100px;
+}*/
 
 #foodList .card {
   cursor: pointer;

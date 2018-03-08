@@ -218,14 +218,12 @@ function setSearch(search) {
     	console.log(data);
       let cols = 0;
     	let index = 0;
-      	$.each(data.hits, function(i, food) {
+      $('#foodList').append('<div class="row listImg"></div>');
+      $.each(data.hits, function(i, food) {
         index = i + 1;
-        $('#foodList').append('<div class="row listImg"></div>');
-    
-
         let recipe = food.recipe;
         
-        $('#foodList .row').append(`<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 imgcont" data-index="${index}">
+        $('#foodList .listImg').append(`<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 imgcont" data-index="${index}">
 
                                     <div class="card mb-3">
                                     <img class="card-img-top img-${index}" src="${recipe.image}">

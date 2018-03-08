@@ -13,49 +13,48 @@
 </head>
 
 <body>
-
-
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
-        <a class="navbar-brand" href="#">Navbar</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-          aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+      <a class="navbar-brand" href="#"><img class="imgNav" src="assets/img/logo.png" alt=""></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
     
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-              <li class="nav-item dropdown" id="menuNavbar">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
-                  aria-expanded="false">
-                  More
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="#">Profile</a>
-                  <a class="dropdown-item" href="#" id="btn-myRecipes">My recipes</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#" id="logout-btn">Log out</a>
-                </div>
-              </li>
-          </ul>
-          <form class="form-inline my-2 my-lg-0" id="registry">
-            <button type="button" class="btn btn-outline-success my-2 my-sm-0" data-toggle="modal" data-target="#modalLog-in">Log in</button>
-            <button type="button" class="btn btn-outline-success my-2 my-sm-0" data-toggle="modal" data-target="#modalSing-up">Sign up</button>
-          </form>
-          <!-- <form class="form-inline my-2 my-lg-0" id="nav-search">
-            <input class="form-control mr-sm-2 searchRecetas" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0 btnSearch" type="submit">Search</button>
-          </form> -->
-        </div>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <li class="nav-item dropdown" id="menuNavbar">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
+                More
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Profile</a>
+                <a class="dropdown-item" href="#" id="btn-myRecipes">My recipes</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#" id="logout-btn">Log out</a>
+              </div>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0" id="registry">
+          <button type="button" class="btn btn-outline-success my-2 my-sm-0" data-toggle="modal" data-target="#modalLog-in">Log in</button>
+          <button type="button" class="btn btn-outline-success my-2 my-sm-0" data-toggle="modal" data-target="#modalSing-up">Sign up</button>
+        </form>
+      </div>
     </div>
   </nav>
   <section id="home">
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+          <img class="intro" src="assets/img/ricasRecetas.jpg" alt="">
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <h3>Recetas del Día</h3>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
           <div id="carouselExampleControls" class="carousel slide multi-item-carousel" data-ride="carousel">
-          <div class="carousel-inner">   
+            <div class="carousel-inner">   
             </div>
           </div>
           <a class="carousel-control-prev left carousel-control" href="#carouselExampleControls" role="button" data-slide="prev">
@@ -67,13 +66,50 @@
             <span class="sr-only">Next</span>
           </a>
         </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+          <div id="search_recipe" class="text-center">
+            <ul class="filtro">
+              <li><a value="Dulce" href="#" type="button" class="btn btn-primary dulce">
+                <img class="imgFiltros" src="assets/img/postre.png" alt=""><p class="filtroCategoria">Postres</p></a>
+              </li>
+              <li><a value="Vegetal" href="#" type="button" class="btn btn-primary vegetal">
+                <img class="imgFiltros" src="assets/img/verdura.png" alt=""><p class="filtroCategoria">Verduras</p></a>
+              </li>
+              <li><a value="Carne" href="#" type="button" class="btn btn-primary carne">
+                <img class="imgFiltros" src="assets/img/carne.png" alt=""><p class="filtroCategoria">Carne</p></a>
+              </li>
+              <li><a value="Pollo" href="#" type="button" class="btn btn-primary pollo">
+                <img class="imgFiltros" src="assets/img/pollo.png" alt=""><p class="filtroCategoria">Pollo</p></a>
+              </li>
+              <li><a value="Huevo" href="#" type="button" class="btn btn-primary huevo">
+                <img class="imgFiltros" src="assets/img/huevo.png" alt=""><p class="filtroCategoria">Huevos</p></a>
+              </li>
+              <li><a values="Pasta" href="#" type="button" class="btn btn-primary pasta">
+                <img class="imgFiltros" src="assets/img/pasta.png" alt=""><p class="filtroCategoria">Pasta</p></a>
+              </li>
+              <li><a value="Arroz" href="#" type="button" class="btn btn-primary arroz">
+                <img class="imgFiltros" src="assets/img/arroz.png" alt=""><p class="filtroCategoria">Arroz</p></a>
+              </li>
+              <li><a value="Sopa" href="#" type="button" class="btn btn-primary sopa">
+                <img class="imgFiltros" src="assets/img/sopa.png" alt=""><p class="filtroCategoria">Sopas</p></a>
+              </li>
+              <li><a value="Pan" href="#" type="button" class="btn btn-primary pan">
+                <img class="imgFiltros" src="assets/img/pan.png" alt=""><p class="filtroCategoria">Pan</p></a>
+              </li>
+              <li><a value="Cereal" href="#" type="button" class="btn btn-primary cereal">
+                <img class="imgFiltros" src="assets/img/legumbre.png" alt=""><p class="filtroCategoria">Cereal</p></a>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
       <div class="row justify-content-center">
         <div class="col-lg-10 col-md-10 col-sm-12 col-12">
-          <div id="search_recipe" class="text-center">
+          <section id="search">
             <input id="searchRecetas" type="text" placeholder="Search Recipe">
-          </div>
+          </section>
         </div>
       </div>
       <div class="row justify-content-center">
