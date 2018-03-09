@@ -17,14 +17,15 @@ section .container {
 
 #intro {
   padding: 0;
-  margin: 0;  
-  background-image: url('../img/fondo1.jpg');
-  width:100%;
-  height: 400px;
+  margin: 0;
 }
-/*.navbar {
+
+.intro {
+  width: 100%;  
+}
+.navbar {
   background-color: #0D5839 !important;
-}*/
+}
 .navbar-brand {
   padding: 0 !important; 
 }
@@ -32,10 +33,28 @@ section .container {
   width: 80%;
 }
 
+.btn-login, .btn-singup {
+  color: #B6D73F !important;
+  border-color: #B6D73F !important;
+}
+
+.navbar-toggler-icon{
+  color: #B6D73F !important;;
+}
+
+.btn-login:hover, .btn-singup:hover {
+  border-color: none !important;
+  color: #0D5839 !important;
+  background-color: #B6D73F !important;
+}
+
 #registry button {
   margin: 0 0.5em;
 }
 
+.filtro {
+  padding: 0;
+}
 .filtro li {
   display: inline-block;
 }
@@ -45,6 +64,9 @@ section .container {
   padding: 0 !important ;    
 }
 
+.btn {
+  width: 100px;
+}
 .dulce {
   background-color:#ad1557;
 }
@@ -85,25 +107,44 @@ section .container {
 }
 
 #foodList .card table {
-    font-size: 1.1em;
+  font-size: 1.1em;
 }
 
 #foodList .card table td:first-child {
-    color: green;
+  color: green;
 }
 
 #foodList .card table td:nth-child(2) {
-    color: red;
+  color: red;
 }
 
 #foodList .card p small {
-    background: rgb(247, 255, 247);
-    padding: 4px;
-    border: 1px dashed green;
-    border-radius: 4px;
+  background: rgb(247, 255, 247);
+  padding: 4px;
+  border: 1px dashed green;
+  border-radius: 4px;
 }
 
 /*desde aqui clases del carrusel*/
+
+.img-thumbnail {
+  border-color: #82BF48;
+  background-color: #82BF48;
+}
+
+.text {
+  background-color: rgba(0, 8, 20, 0.5);
+  position:absolute;
+  bottom: 7%; 
+  padding: 3% 0 3% 0;
+  color: #fff;
+  font-size: 1.5em;
+}
+
+.carousel-caption {
+  left: 7% !important;
+  right: 7% !important;
+}
 
 .carousel-control-next, .carousel-control-prev {
   width: 10% !important;
@@ -130,18 +171,14 @@ section .container {
   font: 10px !important;
 }
 
-.nameFood {
-  color: red;
-}
-
 #searchRecetas {
-    width: 100%;
-    padding: 0.5em 1em;
-    margin: 0.5em;
-    font-size: 1.5em;
-    border: none;
-    border-radius: 1em;
-    outline: none;
+  width: 100%;
+  padding: 0.5em 1em;
+  margin: 0.5em 0 0.5em 0;
+  font-size: 1.5em;
+  border: none;
+  border-radius: 1em;
+  outline: none;
  }
     
 #carrousel {
@@ -152,7 +189,6 @@ section .container {
 }
 
 #search_recipe {
-  height: 20vh;
   margin: 0.5em 0;
 }
 
