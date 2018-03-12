@@ -1,13 +1,17 @@
+// variables globales para guardar y reutilizar datos necesarios
+var database = null;
+var user = null;
+
 $(document).ready(() => { 
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
       $('#registry').hide();
-      $('#menuNavbar').show();
+      $('.menuNavbar').show();
       $('#nav-search').show();
       loadCurrentUser(user.uid);
     } else {
       $('#nav-search').hide();
-      $('#menuNavbar').hide();
+      $('.menuNavbar').hide();
       $('#registry').show();
       $('#login-btn').click(login);
       $('#signup-btn').click(signup);
@@ -18,11 +22,9 @@ $(document).ready(() => {
       $('#facebook-btn2').click(ingresoFacebook);
     }
   }); // firebase
+  database = firebase.database();
 });
 
-// variables globales para guardar y reutilizar datos necesarios
-var database = firebase.database();
-var user = null;
 
 function login() {
   let email = $('#email-login').val();
@@ -44,6 +46,7 @@ function signup() {
 
 function logout() {
   firebase.auth().signOut();
+  console.log('sali')
 }
 
 function ingresoGoogle() {
@@ -99,44 +102,11 @@ function ingresoFacebook() {
 
 if (screen.width < 768) {
 	$('#productosDelDia').hide();
+  $('.intro').attr('src', 'assets/img/fondo2.jpg')
 } else {
 	 ajustePantallaGrande();
 }
 
-// solo cuando se carga desde celular 
-function ajustePantallaPequeña() {
-  fetch('https://api.edamam.com/search?q=' + randomize() + '&app_id=01dfc015&app_key=ab3ca8c9eb858e5904ba8bc581944e8e&from=0&to=9&calories=gte%20591,%20lte%20722&health=alcohol-free').then(function(response) {
-	    return response.json();
-	 })
-	
-    .then(function(data) {
-    	let index = 0;
-
-			$.each(data.hits, function(i, food) {
-	      index += 1;
-        /*<div class="carousel-item active">
-                <img src="..." alt="...">
-                <div class="carousel-caption d-none d-md-block">
-                  <h5>...</h5>
-                  <p>...</p>
-                </div>
-              </div>*/
-			  $(".carousel-inner").append(`<div class="carousel-item img-carousel-${index}"></div>`);
-			 
-
-		    let image = food.recipe.image;
-		    let name = food.recipe.label;
-
-		    $('.img-carousel-' + index).last().append(`
-				                	<a href=""><img class="d-block w-100" src="${image}"></a>
-                          <div class="carousel-caption d-none d-md-block">
-                            <h5>${name}</h5>
-                            <p>...</p>
-                          </div>`);
-    	});
-    	$('.img-carousel-1').addClass('active');
-    });
-}
 
 // solo cuando se carga desde web
 function ajustePantallaGrande() {
@@ -185,6 +155,38 @@ function randomize() {
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
+
+// buscar por categorias de comida
+$('#dulce').click(function(event) {
+  setSearch($('#dulce').data('value'));
+});
+$('#vegetal').click(function(event) {
+  setSearch($('#vegetal').data('value'));
+});
+$('#carne').click(function(event) {
+  setSearch($('#carne').data('value'));
+});
+$('#huevo').click(function(event) {
+  setSearch($('#huevo').data('value'));
+});
+$('#pollo').click(function(event) {
+  setSearch($('#pollo').data('value'));
+});
+$('#pasta').click(function(event) {
+  setSearch($('#pasta').data('value'));
+});
+$('#arroz').click(function(event) {
+  setSearch($('#arroz').data('value'));
+});
+$('#sopa').click(function(event) {
+  setSearch($('#sopa').data('value'));
+});
+$('#pan').click(function(event) {
+  setSearch($('#pan').data('value'));
+});
+$('#cereal').click(function(event) {
+  setSearch($('#cereal').data('value'));
+});
   
 // llama a la funcion cuando al buscador se presiona un enter
 $('#searchRecetas').on('keypress', function(event) {
@@ -212,7 +214,7 @@ function setSearch(search) {
         
         $('#foodList .listImg').append(`<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 imgcont" data-index="${index}">
 
-                                    <div class="card mb-3">
+                                    <div class="card cardReceta mb-3">
                                     <img class="card-img-top img-${index}" src="${recipe.image}">
                                     <div class="card-body">
                                     <h5 class="card-title text-${index}">${recipe.label}</h5>
@@ -231,15 +233,12 @@ function setSearch(search) {
                                     </div>
                                     </div>`);
 
+      });
       // llama a la funcion cuando pasar por la imagen
-  		$('.imgcont').mouseover(getInImg);
+      $('.imgcont').mouseover(getInImg);
       // llama a la funcion cuando sale de la imagen
   		$('.imgcont').mouseleave(getOutImg);
-
-      //
-      $('#foodList .card').click(showInfo);
-  
-      });
+      $('.cardReceta').click(showInfo);
    });
 
 }
@@ -301,38 +300,53 @@ function getOutImg() {
 //
 
 function showInfo() {
+  console.log('entre!!!!!!!');
   let index = $(this).parent().data('index');
   var name = $('.text-'+index).text();
-  console.log(name)
-  fetch('https://api.edamam.com/search?q=' + name + '&app_id=01dfc015&app_key=ab3ca8c9eb858e5904ba8bc581944e8e&from=0&to=100&calories=gte%20591,%20lte%20722&health=alcohol-free').then(function(response) {
+  console.log(name);
+  fetch(`https://api.edamam.com/search?q=${name}&app_id=01dfc015&app_key=ab3ca8c9eb858e5904ba8bc581944e8e&from=0&to=100&calories=gte%20591,%20lte%20722&health=alcohol-free`).then(function(response) {
       return response.json();
    })
   
     .then(function(data) {
       console.log('es mio',data)
       const recipe = data.hits[0].recipe;
+      console.log(recipe.image);
       $('#info_modal .modal-title').text(recipe.label);
-      $('#info_modal .modal-body').text(recipe.ingredientLines);
+      $('#info_modal .modal-body img').attr('src', recipe.image);
+      $('#info_modal .modal-body p').html(recipe.ingredientLines.join('<br>'));
+      $('#save_recipe').val(index);
 
       $('#info_modal').modal();
 
       // llama a la funcion para guardar recetas
-      $('.save_recipe').click(appendReceta);
+      $('#save_recipe').click(appendReceta);
     });
 }
 
 // agregando recetas a firebase
 function appendReceta() {
-  let index = $(this).parent().data('index');
+  let index = $(this).val();
   var name = $('.text-'+index).html();
-  fetch('https://api.edamam.com/search?q='+name+'&app_id=01dfc015&app_key=ab3ca8c9eb858e5904ba8bc581944e8e&from=0&to=9&calories=gte%20591,%20lte%20722&health=alcohol-free').then(function(response) {
+  /*if()*/
+  fetch(`https://api.edamam.com/search?q=${name}&app_id=01dfc015&app_key=ab3ca8c9eb858e5904ba8bc581944e8e&from=0&to=9&calories=gte%20591,%20lte%20722&health=alcohol-free`).then(function(response) {
       return response.json();
    }) 
     .then(function(data) {
+      console.log(data)
       let dataReceta = data.hits[0].recipe;
 
       let uid = user;
-      database.ref('/recetas/'+uid+'/'+dataReceta.label).set(dataReceta);
+      console.log(uid, 'usuario')
+      database.ref('/recetas/'+uid+'/'+dataReceta.label).set({
+        'titulo': dataReceta.label,
+        'imagen': dataReceta.image,
+        'receta': dataReceta.ingredientLines,
+        'caloriasTotales': Math.round(dataReceta.calories),
+        'dieta': diet(dataReceta),
+        'precaucion': cautions(dataReceta),
+        'daily': dataReceta.totalDaily
+      });
     });
 }
 
@@ -347,6 +361,7 @@ $('#btn-myRecipes').click(cargar);
 function cargar() {
   let uid = user;
   database.ref('/recetas/'+uid).on('value', function(data) {
+    console.log(data)
     $('#home').hide();
     $('#myRecipes').show();
     $('#myRecipes .row').html("");
@@ -354,9 +369,9 @@ function cargar() {
       $.each(misRecetas, function(i, misRecetas) {
         index = i + 1;
 
-        let image = misRecetas.image;
-        let name = misRecetas.label;
-        let receta = misRecetas.ingredientLines;
+        let image = misRecetas.imagen;
+        let name = misRecetas.titulo;
+        let receta = misRecetas.receta;
         
         $('#myRecipes .listImg').append(`<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 imgcont" data-index="${index}">
                                       <div class="row" id="calificar">
@@ -364,7 +379,7 @@ function cargar() {
                                           <img class="img img-thumbnail" data-name="${index}" src="${image}">
                                         </div>
                                         <div class=" col-7">
-                                            <h5 class="text">${name}</h5> 
+                                            <h5 class="">${name}</h5> 
                                             <p>${receta}</p> 
                                         </div>
                                        </div>
@@ -374,6 +389,13 @@ function cargar() {
 
 
   });
+}
+
+$('.navbar-brand').click(volver);
+
+function volver() {
+  $('#home').show();
+  $('#myRecipes').hide();
 }
 
 

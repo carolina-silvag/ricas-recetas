@@ -38,9 +38,9 @@ section .container {
   border-color: #B6D73F !important;
 }
 
-.navbar-toggler-icon{
+/*.navbar-toggler-icon{
   color: #B6D73F !important;;
-}
+}*/
 
 .btn-login:hover, .btn-singup:hover {
   border-color: none !important;
@@ -50,6 +50,21 @@ section .container {
 
 #registry button {
   margin: 0 0.5em;
+}
+
+.btn-salir {
+  color: #B6D73F !important;
+  border-color: #B6D73F !important;
+}
+
+.btn-salir:hover {
+  color: #0D5839 !important;
+  border-color: none !important;
+  background-color:  #B6D73F !important;
+}
+
+.nav-link {
+  color: #B6D73F !important;
 }
 
 .filtro {
@@ -199,4 +214,42 @@ section .container {
   border: none;
   border-radius: 1em;
   outline: none;
+}
+
+/* clases del modal*/
+
+.modal-content {
+  background-color: #ecee98;
+  color: #0D5839;
+}
+.modal-body input {
+  margin: 2% 0 2% 0;
+}
+
+.fa-facebook:hover, .fa-google-plus-square:hover {
+  color: #82BF48;
+}
+
+.modal-footer .btn-secondary {
+  background-color: #0D5839;
+  border-color: #0D5839;
+  color: #82BF48; 
+}
+
+.modal-footer .btn-secondary:hover {
+  background-color: #B6D73F;
+  border-color: #B6D73F;
+  color: #0D5839;
+}
+
+.modal-footer .btn-primary {
+  background-color: #82BF48;
+  border-color: #82BF48;
+  color: #0D5839; 
+}
+
+.modal-footer .btn-primary:hover {
+  background-color: #B6D73F;
+  border-color: #B6D73F;
+  color: #0D5839; 
 }

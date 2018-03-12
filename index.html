@@ -22,20 +22,18 @@
       </button>
     
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <li class="nav-item dropdown" id="menuNavbar">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
-                aria-expanded="false">
-                More
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Profile</a>
-                <a class="dropdown-item" href="#" id="btn-myRecipes">My recipes</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#" id="logout-btn">Log out</a>
-              </div>
-            </li>
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        </ul>
+        <ul class="navbar-nav my-2 my-lg-0">
+          <li class="nav-item active menuNavbar">
+            <a class="nav-link" href="#"></a>
+          </li>
+          <li class="nav-item menuNavbar">
+            <a id="btn-myRecipes" class="nav-link" href="#">Mis Recetas</a>
+          </li>
+          <li class="nav-item menuNavbar">
+            <button id="logout-btn" type="button" class="btn btn-outline-success my-2 my-sm-0 btn-salir">Salir</button>
+          </li>
         </ul>
         <form class="form-inline my-2 my-lg-0" id="registry">
           <button type="button" class="btn btn-outline-success my-2 my-sm-0 btn-login" data-toggle="modal" data-target="#modalLog-in">Log in</button>
@@ -72,34 +70,34 @@
         <div class="col-lg-12 col-md-12 col-sm-12 col-12">
           <div id="search_recipe" class="text-center">
             <ul class="filtro">
-              <li><a value="Dulce" href="#" type="button" class="btn btn-primary dulce">
+              <li><a id="dulce" data-value="dulce" href="#foodList" type="button" class="btn btn-primary dulce">
                 <img class="imgFiltros" src="assets/img/postre.png" alt=""><p class="filtroCategoria">Postres</p></a>
               </li>
-              <li><a value="Vegetal" href="#" type="button" class="btn btn-primary vegetal">
+              <li><a id="vegetal" data-value="vegetal" href="#foodList" type="button" class="btn btn-primary vegetal">
                 <img class="imgFiltros" src="assets/img/verdura.png" alt=""><p class="filtroCategoria">Verduras</p></a>
               </li>
-              <li><a value="Carne" href="#" type="button" class="btn btn-primary carne">
+              <li><a id="carne" data-value="carne" href="#foodList" type="button" class="btn btn-primary carne">
                 <img class="imgFiltros" src="assets/img/carne.png" alt=""><p class="filtroCategoria">Carne</p></a>
               </li>
-              <li><a value="Pollo" href="#" type="button" class="btn btn-primary pollo">
+              <li><a id="pollo" data-value="pollo" href="#foodList" type="button" class="btn btn-primary pollo">
                 <img class="imgFiltros" src="assets/img/pollo.png" alt=""><p class="filtroCategoria">Pollo</p></a>
               </li>
-              <li><a value="Huevo" href="#" type="button" class="btn btn-primary huevo">
+              <li><a id="huevo" data-value="huevo" href="#foodList" type="button" class="btn btn-primary huevo">
                 <img class="imgFiltros" src="assets/img/huevo.png" alt=""><p class="filtroCategoria">Huevos</p></a>
               </li>
-              <li><a values="Pasta" href="#" type="button" class="btn btn-primary pasta">
+              <li><a id="pasta" data-value="pasta" href="#foodList" type="button" class="btn btn-primary pasta">
                 <img class="imgFiltros" src="assets/img/pasta.png" alt=""><p class="filtroCategoria">Pasta</p></a>
               </li>
-              <li><a value="Arroz" href="#" type="button" class="btn btn-primary arroz">
+              <li><a id="arroz" data-value="arroz" href="#foodList" type="button" class="btn btn-primary arroz">
                 <img class="imgFiltros" src="assets/img/arroz.png" alt=""><p class="filtroCategoria">Arroz</p></a>
               </li>
-              <li><a value="Sopa" href="#" type="button" class="btn btn-primary sopa">
+              <li><a id="sopa" data-value="sopa" href="#foodList" type="button" class="btn btn-primary sopa">
                 <img class="imgFiltros" src="assets/img/sopa.png" alt=""><p class="filtroCategoria">Sopas</p></a>
               </li>
-              <li><a value="Pan" href="#" type="button" class="btn btn-primary pan">
+              <li><a id="pan" data-value="pan" href="#foodList" type="button" class="btn btn-primary pan">
                 <img class="imgFiltros" src="assets/img/pan.png" alt=""><p class="filtroCategoria">Pan</p></a>
               </li>
-              <li><a value="Cereal" href="#" type="button" class="btn btn-primary cereal">
+              <li><a id="cereal" data-value="cereal" href="#foodList" type="button" class="btn btn-primary cereal">
                 <img class="imgFiltros" src="assets/img/legumbre.png" alt=""><p class="filtroCategoria">Cereal</p></a>
               </li>
             </ul>
@@ -143,8 +141,8 @@
             <input class="form-control mr-sm-2" type="password" id="pw-login" placeholder="Password" aria-label="Password">
             <div class="text-center">
               <p class="text-center">O ingresa con</p>
-              <span id="google-btn1"><i class="fab fa-facebook fa-3x"></i></span>
-              <span id="facebook-btn1"><i class="fab fa-google-plus-square fa-3x"></i></span>
+              <span id="facebook-btn1"><i class="fab fa-facebook fa-3x"></i></span>
+              <span id="google-btn1"><i class="fab fa-google-plus-square fa-3x"></i></span>
             </div>
           </div>
           <div class="modal-footer">
@@ -170,12 +168,12 @@
             <input class="form-control mr-sm-2" type="password" id="pw-signup" placeholder="Password" aria-label="Password">
             <div class="text-center">
               <p class="text-center">O Registrate con</p>
-              <span><i id="google-btn2" class="fab fa-facebook fa-3x"></i></span>
-              <span><i id="facebook-btn2" class="fab fa-google-plus-square fa-3x"></i></span>
+              <span><i id="facebook-btn2" class="fab fa-facebook fa-3x"></i></span>
+              <span><i id="google-btn2" class="fab fa-google-plus-square fa-3x"></i></span>
             </div>
 
           </div>
-          <div class="modal-footer text-center">
+          <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             <button type="button" class="btn btn-primary" id="signup-btn">Sing up</button>
           </div>
@@ -194,10 +192,14 @@
         </button>
       </div>
       <div class="modal-body">
+        <div class="text-center">
+          <img src="" alt="">  
+        </div>
         <p></p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" id="save_recipe">Save recipe</button>
+        <div class="saveReceta"></div>
+        <button type="button" class="btn btn-primary" value='' id="save_recipe">Save recipe</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
     </div>
